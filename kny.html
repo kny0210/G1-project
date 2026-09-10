@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Essential English Idioms Mastery</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    /* Stepper Navigation */
+    .step-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      background: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .step-btn {
+      flex: 1;
+      text-align: center;
+      padding: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .step-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* Modules */
+    .module {
+      display: none;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+
+    .module.active {
+      display: block;
+    }
+
+    .module-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Flashcard (Step 1) */
+    .flashcard-box {
+      perspective: 1000px;
+      height: 320px;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flashcard-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      border-radius: 16px;
+      border: 2px solid var(--border);
+      background: #ffffff;
+    }
+
+    .flashcard-back {
+      background: #fdfefe;
+      transform: rotateY(180deg);
+      text-align: left;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .fc-word {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .fc-prompt {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .fc-meaning {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+
+    .fc-example {
+      font-style: italic;
+      color: #475569;
+      margin-bottom: 16px;
+      background: #f1f5f9;
+      padding: 10px;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .fc-confusing {
+      border-left: 4px solid var(--warning);
+      background: #fffbeb;
+      padding: 10px 12px;
+      border-radius: 0 8px 8px 0;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .fc-confusing strong {
+      color: #b45309;
+    }
+
+    .nav-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .btn-secondary:hover {
+      background: #cbd5e1;
+    }
+
+    .counter-tag {
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: #e0e7ff;
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* Quiz (Step 2) */
+    .quiz-card {
+      margin-bottom: 20px;
+    }
+
+    .quiz-sentence {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-opt-btn {
+      text-align: left;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .quiz-opt-btn:hover {
+      border-color: var(--primary);
+      background: #f8fafc;
+    }
+
+    .quiz-opt-btn.correct {
+      background: #dcfce7;
+      border-color: var(--success);
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .quiz-opt-btn.wrong {
+      background: #fee2e2;
+      border-color: var(--danger);
+      color: #7f1d1d;
+      font-weight: 700;
+    }
+
+    .quiz-explanation {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* Blank Spelling (Step 3) */
+    .spelling-card {
+      margin-bottom: 20px;
+    }
+
+    .spelling-prompt {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+
+    .spelling-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .spelling-input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      font-size: 1.05rem;
+    }
+
+    .spelling-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .spelling-feedback {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    /* Handwriting (Step 4) */
+    .canvas-container {
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background: #ffffff;
+      position: relative;
+      touch-action: none;
+      margin-bottom: 12px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 220px;
+      cursor: crosshair;
+    }
+
+    .canvas-tools {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    /* Result/Feedback (Step 5) */
+    .feedback-section {
+      margin-bottom: 20px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
+
+    .feedback-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .impact-callout {
+      border-left: 4px solid var(--danger);
+      background: #fff5f5;
+      padding: 12px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 8px;
+      font-size: 0.92rem;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .badge-status.good { background: #dcfce7; color: #15803d; }
+    .badge-status.warn { background: #fef3c7; color: #b45309; }
+    .badge-status.bad { background: #fee2e2; color: #b91c1c; }
+
+    .toast-banner {
+      display: none;
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      color: #0369a1;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>핵심 표현 마스터 트랙</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">혼동 표현 분별력 및 정확한 철자 완성 프로그램</p>
+  </header>
+
+  <div id="roundToast" class="toast-banner"></div>
+
+  <!-- Stepper Tabs -->
+  <nav class="step-nav">
+    <button class="step-btn active" onclick="switchStep(0)">1. 플래쉬카드</button>
+    <button class="step-btn" onclick="switchStep(1)">2. 혼동 표현 퀴즈</button>
+    <button class="step-btn" onclick="switchStep(2)">3. 빈칸 스펠링</button>
+    <button class="step-btn" onclick="switchStep(3)">4. 핸드라이팅</button>
+    <button class="step-btn" onclick="switchStep(4)">5. 정밀 진단 리포트</button>
+  </nav>
+
+  <!-- Step 1: Flashcard -->
+  <section class="module active" id="step-0">
+    <div class="module-title">
+      <span>표현 플래쉬카드</span>
+      <span class="counter-tag" id="fcCounter">1 / 6</span>
+    </div>
+    
+    <div class="flashcard-box" onclick="flipCard()">
+      <div class="flashcard-inner" id="fcInner">
+        <div class="flashcard-front">
+          <div class="fc-word" id="fcWord">keep track of</div>
+          <p class="fc-prompt">카드를 클릭하면 의미와 혼동 주의 표현이 나타납니다.</p>
+        </div>
+        <div class="flashcard-back">
+          <div class="fc-meaning" id="fcMeaning">~을 놓치지 않다, 파악하다, 기록하다</div>
+          <div class="fc-example" id="fcExample">"It's hard to keep track of all the expenses."</div>
+          <div class="fc-confusing" id="fcConfusing">
+            <strong>[참고 - 혼동 주의]</strong> lose track of (~을 놓치다/잊어버리다)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-controls">
+      <button class="btn btn-secondary" onclick="prevCard()">이전</button>
+      <span style="font-size:0.85rem; color: var(--text-muted);" id="roundStatus">1회독 진행 중</span>
+      <button class="btn" onclick="nextCard()">다음</button>
+    </div>
+  </section>
+
+  <!-- Step 2: Confusing Words Quiz -->
+  <section class="module" id="step-1">
+    <div class="module-title">
+      <span>혼동 표현 분별 퀴즈</span>
+      <span class="counter-tag" id="quizCounter">1 / 6</span>
+    </div>
+    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+      단어 암기 효율성을 극대화하기 위해 문맥 기반 객관식 퀴즈(Contextual Retrieval)를 채택했습니다. 문맥에 알맞은 정확한 표현을 고르세요.
+    </p>
+    <div class="quiz-card">
+      <div class="quiz-sentence" id="quizSentence">문장 로딩 중...</div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-explanation" id="quizExpl"></div>
+    </div>
+    <div class="nav-controls">
+      <button class="btn btn-secondary" onclick="prevQuiz()">이전 문항</button>
+      <button class="btn" onclick="nextQuiz()">다음 문항</button>
+    </div>
+  </section>
+
+  <!-- Step 3: Spelling Blank -->
+  <section class="module" id="step-2">
+    <div class="module-title">
+      <span>빈칸 스펠링 학습</span>
+      <span class="counter-tag" id="spellingCounter">1 / 6</span>
+    </div>
+    <div class="spelling-card">
+      <div class="spelling-prompt" id="spellingPrompt">의미 로딩 중...</div>
+      <div style="font-size: 1.3rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 16px; color: var(--primary);" id="spellingMasked">
+        k_ _p  tr_ck  _f
+      </div>
+      <div class="spelling-input-group">
+        <input type="text" class="spelling-input" id="spellingInput" placeholder="전체 표현을 완벽한 철자로 입력하세요" autocomplete="off">
+        <button class="btn" onclick="checkSpelling()">확인</button>
+      </div>
+      <div class="spelling-feedback" id="spellingFeedback"></div>
+    </div>
+    <div class="nav-controls">
+      <button class="btn btn-secondary" onclick="prevSpelling()">이전</button>
+      <button class="btn" onclick="nextSpelling()">다음</button>
+    </div>
+  </section>
+
+  <!-- Step 4: Hand-writing -->
+  <section class="module" id="step-3">
+    <div class="module-title">
+      <span>Hand-writing 연습</span>
+      <span class="counter-tag" id="hwCounter">1 / 6</span>
+    </div>
+    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;">
+      마우스 또는 터치를 사용하여 아래 표현을 화면에 직접 필기해보세요. 근육 기억(Muscle Memory)을 형성합니다.
+    </p>
+    <div style="font-size: 1.4rem; font-weight: 700; color: #334155; margin-bottom: 8px;" id="hwTargetWord">
+      keep track of
+    </div>
+    <div class="canvas-container">
+      <canvas id="hwCanvas"></canvas>
+    </div>
+    <div class="canvas-tools">
+      <button class="btn btn-secondary" onclick="clearCanvas()">지우기</button>
+      <button class="btn" onclick="saveHandwriting()">작성 완료 확인</button>
+    </div>
+    <div class="nav-controls">
+      <button class="btn btn-secondary" onclick="prevHw()">이전</button>
+      <button class="btn" onclick="nextHw()">다음</button>
+    </div>
+  </section>
+
+  <!-- Step 5: Diagnosis & Feedback -->
+  <section class="module" id="step-4">
+    <div class="module-title">
+      <span>종합 학습 진단 및 영향 분석 리포트</span>
+    </div>
+    <div id="reportContent">
+      <!-- Generated via JS -->
+    </div>
+    <div style="text-align: center; margin-top: 24px;">
+      <button class="btn" onclick="restartAll()">처음부터 다시 학습하기</button>
+    </div>
+  </section>
+</div>
+
+<script>
+  // 1. Core Data Set
+  const idiomsData = [
+    {
+      id: 0,
+      target: "keep track of",
+      meaning: "~을 놓치지 않다, 파악하다, 기록하다",
+      example: "It is crucial to keep track of your daily progress.",
+      confusing: "lose track of",
+      confusingMeaning: "~을 놓치다, 잊어버리다",
+      masked: "k_ _p  tr_ck  _f",
+      quizContext: "With so many project deadlines approaching, it's hard to _______ all the changes.",
+      correctAnswer: "keep track of",
+      distractor: "lose track of",
+      quizExpl: "'흐름이나 변경사항을 놓치지 않고 추적하다'는 문맥이므로 'keep track of'가 적합합니다. 'lose track of'는 망각/통제 상실의 맥락입니다."
+    },
+    {
+      id: 1,
+      target: "take a break",
+      meaning: "휴식을 취하다, 잠시 쉬다",
+      example: "Let's take a break before starting the next section.",
+      confusing: "break up",
+      confusingMeaning: "헤어지다, 부서지다 / break in (끼어들다, 길들이다)",
+      masked: "t_k_  _  br_ _k",
+      quizContext: "You have been staring at the monitor for four hours straight. You should _______.",
+      correctAnswer: "take a break",
+      distractor: "break in",
+      quizExpl: "'휴식을 취하다'는 명사 break를 취한 'take a break'입니다. 'break in'은 불법 침입이나 대화 끼어들기를 뜻합니다."
+    },
+    {
+      id: 2,
+      target: "stay away from",
+      meaning: "~을 가까이하지 않다, 피하다",
+      example: "You should stay away from processed sugar.",
+      confusing: "stay over",
+      confusingMeaning: "외박하다, 하룻밤 묵어가다 / run away from (~로부터 도망치다)",
+      masked: "st_y  _w_y  fr_m",
+      quizContext: "Doctors strongly advise patients to _______ foods high in saturated fats.",
+      correctAnswer: "stay away from",
+      distractor: "stay over",
+      quizExpl: "'가까이하지 않고 멀리하다'라는 의미는 전치사 away from과 결합한 'stay away from'입니다. 'stay over'는 하룻밤 묵는 것을 의미합니다."
+    },
+    {
+      id: 3,
+      target: "get enough sleep",
+      meaning: "충분한 수면을 취하다",
+      example: "Teenagers need to get enough sleep for brain development.",
+      confusing: "fall asleep",
+      confusingMeaning: "잠에 빠져들다 (수면 상태의 질적/양적 확보 vs 입면 상태 변화)",
+      masked: "g_t  _n_ _gh  sl_ _p",
+      quizContext: "Chronic fatigue usually happens when you fail to _______ on weekdays.",
+      correctAnswer: "get enough sleep",
+      distractor: "fall asleep",
+      quizExpl: "'충분한 수면량 확보'를 의미하므로 'get enough sleep'이 맞습니다. 'fall asleep'은 깨어있다가 잠에 드는 순간적인 동작 전환입니다."
+    },
+    {
+      id: 4,
+      target: "deal with",
+      meaning: "~을 다루다, 처리하다, 대처하다",
+      example: "She knows how to deal with difficult clients.",
+      confusing: "cope with vs deal in",
+      confusingMeaning: "deal in (~을 취급/거래하다, 상품을 팔다)",
+      masked: "d_ _l  w_th",
+      quizContext: "A competent manager must know how to _______ unexpected budget deficits.",
+      correctAnswer: "deal with",
+      distractor: "deal in",
+      quizExpl: "'문제나 상황을 처리/해결하다'는 'deal with'입니다. 'deal in'은 특정 상품(주식, 골동품 등)을 사업적으로 취급한다는 의미입니다."
+    },
+    {
+      id: 5,
+      target: "stick to",
+      meaning: "~을 고수하다, 충실히 지키다",
+      example: "It is essential to stick to the original plan.",
+      confusing: "stick out",
+      confusingMeaning: "눈에 띄다, 불쑥 내밀다",
+      masked: "st_ck  t_",
+      quizContext: "Despite many temptations, athletes must _______ their strict dietary rules.",
+      correctAnswer: "stick to",
+      distractor: "stick out",
+      quizExpl: "'원칙이나 계획을 끝까지 고수하다'는 전치사 to와 결합하는 'stick to'입니다. 'stick out'은 눈에 두드러지게 튀어나온다는 의미입니다."
+    }
+  ];
+
+  // Tracking States
+  let currentStep = 0;
+  let flashcardIndex = 0;
+  let flashcardRoundCount = 1;
+  let isCardFlipped = false;
+
+  let quizIndex = 0;
+  let quizResults = {}; // { id: { correct: boolean, chosen: string } }
+
+  let spellingIndex = 0;
+  let spellingResults = {}; // { id: { passed: boolean, tries: number, input: string } }
+
+  let hwIndex = 0;
+  let hwCompleted = {}; // { id: boolean }
+
+  // 2. Step Controller
+  function switchStep(step) {
+    document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+    
+    document.getElementById(`step-${step}`).classList.add('active');
+    document.querySelectorAll('.step-btn')[step].classList.add('active');
+    currentStep = step;
+
+    if (step === 3) {
+      setTimeout(initCanvas, 50);
+    }
+    if (step === 4) {
+      renderFeedbackReport();
+    }
+  }
+
+  // 3. Flashcard Engine
+  function renderFlashcard() {
+    const item = idiomsData[flashcardIndex];
+    document.getElementById('fcWord').innerText = item.target;
+    document.getElementById('fcMeaning').innerText = item.meaning;
+    document.getElementById('fcExample').innerText = item.example;
+    document.getElementById('fcConfusing').innerHTML = `<strong>[참고 - 혼동 주의]</strong> ${item.confusing} (${item.confusingMeaning})`;
+    document.getElementById('fcCounter').innerText = `${flashcardIndex + 1} / ${idiomsData.length}`;
+    
+    // reset flip
+    const inner = document.getElementById('fcInner');
+    inner.classList.remove('is-flipped');
+    isCardFlipped = false;
+  }
+
+  function flipCard() {
+    const inner = document.getElementById('fcInner');
+    isCardFlipped = !isCardFlipped;
+    if (isCardFlipped) {
+      inner.classList.add('is-flipped');
+    } else {
+      inner.classList.remove('is-flipped');
+    }
+  }
+
+  function nextCard() {
+    if (flashcardIndex < idiomsData.length - 1) {
+      flashcardIndex++;
+      renderFlashcard();
+    } else {
+      // Completed 1 set
+      showToast(`축하합니다! 플래쉬카드 ${flashcardRoundCount}회독을 달성했습니다.`);
+      flashcardRoundCount++;
+      flashcardIndex = 0;
+      document.getElementById('roundStatus').innerText = `${flashcardRoundCount}회독 진행 중`;
+      renderFlashcard();
+    }
+  }
+
+  function prevCard() {
+    if (flashcardIndex > 0) {
+      flashcardIndex--;
+      renderFlashcard();
+    }
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('roundToast');
+    toast.innerText = msg;
+    toast.style.display = 'block';
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 3500);
+  }
+
+  // 4. Quiz Engine
+  function renderQuiz() {
+    const item = idiomsData[quizIndex];
+    document.getElementById('quizCounter').innerText = `${quizIndex + 1} / ${idiomsData.length}`;
+    document.getElementById('quizSentence').innerText = item.quizContext;
+    
+    const optionsContainer = document.getElementById('quizOptions');
+    optionsContainer.innerHTML = '';
+
+    const expl = document.getElementById('quizExpl');
+    expl.style.display = 'none';
+
+    // Mix options randomly
+    const opts = [item.correctAnswer, item.distractor].sort(() => Math.random() - 0.5);
+
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt-btn';
+      btn.innerText = opt;
+      btn.onclick = () => selectQuizOption(btn, opt, item);
+
+      // check if answered
+      if (quizResults[item.id]) {
+        btn.disabled = true;
+        if (opt === item.correctAnswer) btn.classList.add('correct');
+        if (opt === quizResults[item.id].chosen && !quizResults[item.id].correct) {
+          btn.classList.add('wrong');
+        }
+      }
+      optionsContainer.appendChild(btn);
+    });
+
+    if (quizResults[item.id]) {
+      expl.innerText = item.quizExpl;
+      expl.style.display = 'block';
+    }
+  }
+
+  function selectQuizOption(button, chosen, item) {
+    const isCorrect = (chosen === item.correctAnswer);
+    quizResults[item.id] = { correct: isCorrect, chosen: chosen };
+
+    const buttons = document.querySelectorAll('.quiz-opt-btn');
+    buttons.forEach(btn => {
+      btn.disabled = true;
+      if (btn.innerText === item.correctAnswer) {
+        btn.classList.add('correct');
+      } else if (btn.innerText === chosen && !isCorrect) {
+        btn.classList.add('wrong');
+      }
+    });
+
+    const expl = document.getElementById('quizExpl');
+    expl.innerText = item.quizExpl;
+    expl.style.display = 'block';
+  }
+
+  function nextQuiz() {
+    if (quizIndex < idiomsData.length - 1) {
+      quizIndex++;
+      renderQuiz();
+    } else {
+      switchStep(2);
+    }
+  }
+
+  function prevQuiz() {
+    if (quizIndex > 0) {
+      quizIndex--;
+      renderQuiz();
+    }
+  }
+
+  // 5. Spelling Engine
+  function renderSpelling() {
+    const item = idiomsData[spellingIndex];
+    document.getElementById('spellingCounter').innerText = `${spellingIndex + 1} / ${idiomsData.length}`;
+    document.getElementById('spellingPrompt').innerText = `[의미] ${item.meaning}`;
+    document.getElementById('spellingMasked').innerText = item.masked;
+    
+    const input = document.getElementById('spellingInput');
+    const feedback = document.getElementById('spellingFeedback');
+    
+    if (spellingResults[item.id] && spellingResults[item.id].passed) {
+      input.value = item.target;
+      feedback.style.color = 'var(--success)';
+      feedback.innerText = "정답 완료!";
+    } else {
+      input.value = '';
+      feedback.innerText = '';
+    }
+  }
+
+  function checkSpelling() {
+    const item = idiomsData[spellingIndex];
+    const input = document.getElementById('spellingInput').value.trim().toLowerCase();
+    const feedback = document.getElementById('spellingFeedback');
+
+    if (!spellingResults[item.id]) {
+      spellingResults[item.id] = { passed: false, tries: 0, input: input };
+    }
+    spellingResults[item.id].tries++;
+    spellingResults[item.id].input = input;
+
+    if (input === item.target.toLowerCase()) {
+      spellingResults[item.id].passed = true;
+      feedback.style.color = 'var(--success)';
+      feedback.innerText = "정확합니다! 올바른 철자입니다.";
+    } else {
+      feedback.style.color = 'var(--danger)';
+      feedback.innerText = `철자가 일치하지 않습니다. 다시 시도하세요. (목표 표현: ${item.target})`;
+    }
+  }
+
+  function nextSpelling() {
+    if (spellingIndex < idiomsData.length - 1) {
+      spellingIndex++;
+      renderSpelling();
+    } else {
+      switchStep(3);
+    }
+  }
+
+  function prevSpelling() {
+    if (spellingIndex > 0) {
+      spellingIndex--;
+      renderSpelling();
+    }
+  }
+
+  // 6. Handwriting Canvas
+  let canvas, ctx, painting = false;
+
+  function initCanvas() {
+    canvas = document.getElementById('hwCanvas');
+    ctx = canvas.getContext('2d');
+    
+    // Fit drawing buffer to displayed size
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = 220;
+
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#1e293b';
+
+    canvas.onmousedown = startPosition;
+    canvas.onmouseup = endPosition;
+    canvas.onmousemove = draw;
+
+    canvas.ontouchstart = (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      startPositionManual(touch.clientX - rect.left, touch.clientY - rect.top);
+    };
+    canvas.ontouchend = (e) => {
+      e.preventDefault();
+      endPosition();
+    };
+    canvas.ontouchmove = (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const rect = canvas.getBoundingClientRect();
+      drawManual(touch.clientX - rect.left, touch.clientY - rect.top);
+    };
+
+    renderHw();
+  }
+
+  function startPosition(e) {
+    painting = true;
+    draw(e);
+  }
+
+  function startPositionManual(x, y) {
+    painting = true;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+
+  function endPosition() {
+    painting = false;
+    ctx.beginPath();
+  }
+
+  function draw(e) {
+    if (!painting) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+
+  function drawManual(x, y) {
+    if (!painting) return;
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+
+  function clearCanvas() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function renderHw() {
+    const item = idiomsData[hwIndex];
+    document.getElementById('hwCounter').innerText = `${hwIndex + 1} / ${idiomsData.length}`;
+    document.getElementById('hwTargetWord').innerText = item.target;
+    clearCanvas();
+  }
+
+  function saveHandwriting() {
+    hwCompleted[idiomsData[hwIndex].id] = true;
+    alert(`'${idiomsData[hwIndex].target}' 필기 완료로 기록되었습니다.`);
+  }
+
+  function nextHw() {
+    if (hwIndex < idiomsData.length - 1) {
+      hwIndex++;
+      renderHw();
+    } else {
+      switchStep(4);
+    }
+  }
+
+  function prevHw() {
+    if (hwIndex > 0) {
+      hwIndex--;
+      renderHw();
+    }
+  }
+
+  // 7. Comprehensive Diagnostic Feedback Report
+  function renderFeedbackReport() {
+    const container = document.getElementById('reportContent');
+    container.innerHTML = '';
+
+    // Calculate metrics
+    let quizCorrectCount = 0;
+    let quizAttempted = 0;
+    let spellingPassedCount = 0;
+    let spellingErrors = [];
+    let confusingErrors = [];
+
+    idiomsData.forEach(item => {
+      // Quiz evaluation
+      if (quizResults[item.id]) {
+        quizAttempted++;
+        if (quizResults[item.id].correct) {
+          quizCorrectCount++;
+        } else {
+          confusingErrors.push({
+            target: item.target,
+            confusing: item.confusing,
+            chosen: quizResults[item.id].chosen
+          });
+        }
+      }
+
+      // Spelling evaluation
+      if (spellingResults[item.id] && spellingResults[item.id].passed) {
+        spellingPassedCount++;
+      } else {
+        spellingErrors.push(item.target);
+      }
+    });
+
+    // Overview box
+    const overviewDiv = document.createElement('div');
+    overviewDiv.className = 'feedback-section';
+    overviewDiv.innerHTML = `
+      <h3>학습 이행 개요</h3>
+      <p>• 플래쉬카드 회독: <strong>${flashcardRoundCount >= 2 ? flashcardRoundCount - 1 : 0}회독 완료</strong></p>
+      <p>• 혼동 표현 구분 정답률: <strong>${quizCorrectCount} / ${idiomsData.length}</strong> (${Math.round((quizCorrectCount / idiomsData.length) * 100)}%)</p>
+      <p>• 스펠링 완벽 통과율: <strong>${spellingPassedCount} / ${idiomsData.length}</strong> (${Math.round((spellingPassedCount / idiomsData.length) * 100)}%)</p>
+      <p>• 핸드라이팅 연습: <strong>${Object.keys(hwCompleted).length} / ${idiomsData.length} 표현 필기 완료</strong></p>
+    `;
+    container.appendChild(overviewDiv);
+
+    // Deep Analysis Section
+    const analysisDiv = document.createElement('div');
+    analysisDiv.className = 'feedback-section';
+
+    let confusingStatus = confusingErrors.length === 0 ? 'good' : 'bad';
+    let confusingBadge = confusingErrors.length === 0 ? '우수: 구분력 확보됨' : '주의: 전치사/구동사 간섭 발생';
+
+    let spellingStatus = spellingErrors.length === 0 ? 'good' : 'warn';
+    let spellingBadge = spellingErrors.length === 0 ? '안정: 철자 회상력 양호' : '취약: 능동적 철자 부정확';
+
+    analysisDiv.innerHTML = `
+      <h3>부족한 부분 정밀 진단</h3>
+      <div style="margin-bottom: 14px;">
+        <span class="badge-status ${confusingStatus}">${confusingBadge}</span>
+        <p style="font-size:0.95rem;">
+          ${confusingErrors.length === 0 
+            ? '유사 철자나 반대 의미의 구동사를 문맥 속에서 명확하게 변별해내고 있습니다.' 
+            : `다음 표현에서 혼동이 발생했습니다: <strong>${confusingErrors.map(e => `${e.target} ↔ ${e.chosen}`).join(', ')}</strong>. 이는 덩어리 표현(collocation)에서 전치사(from, to, with 등)의 뉘앙스를 형태상 유사한 표현과 분리하지 못했음을 뜻합니다.`}
+        </p>
+      </div>
+      <div>
+        <span class="badge-status ${spellingStatus}">${spellingBadge}</span>
+        <p style="font-size:0.95rem;">
+          ${spellingErrors.length === 0 
+            ? '눈으로만 보지 않고 실제 철자 조합을 완벽히 인출할 수 있는 상태입니다.' 
+            : `아직 능동 인출이 불안정한 표현: <strong>${spellingErrors.join(', ')}</strong>. 빈칸을 채우는 과정에서 망설임이나 오타가 발생했습니다.`}
+        </p>
+      </div>
+    `;
+    container.appendChild(analysisDiv);
+
+    // Impact on Real Exam Problem Solving
+    const impactDiv = document.createElement('div');
+    impactDiv.className = 'feedback-section';
+    impactDiv.innerHTML = `
+      <h3>실제 문제풀이(수능/내신/공인영어)에 미치는 직결 영향</h3>
+      <div class="impact-callout">
+        <strong>1. 독해 영역에서의 왜곡 현상 (Direction Inversion)</strong>
+        <p>
+          예를 들어 <em>keep track of</em>를 <em>lose track of</em>와 혼동하거나, <em>stay away from</em>을 단순 이동으로 해석하면, 필자의 권고사항이나 연구 결과의 정반대 논리를 고르는 <strong>빈칸 추론 및 주제/제목 문제의 오답 함정</strong>에 정확히 걸리게 됩니다.
+        </p>
+      </div>
+      <div class="impact-callout">
+        <strong>2. 어휘·어법 및 어형 변화 서술형 감점</strong>
+        <p>
+          <em>deal in</em>(물건을 팔다)과 <em>deal with</em>(문제를 해결하다), <em>stick to</em>(고수하다)의 전치사 탈락/오류는 수능형 어법상 틀린 밑줄 찾기 문제 및 <strong>내신 서술형 영작에서 부분 점수 없이 통감점</strong>되는 결정적 원인이 됩니다.
+        </p>
+      </div>
+      <div class="impact-callout">
+        <strong>3. 청해(Listening) 및 연어 인출 속도 저하</strong>
+        <p>
+          스펠링과 핸드라이팅을 통한 음소-철자 일치 훈련이 부족하면 듣기 평가에서 구동사가 연음(linking sound)으로 뭉개질 때(예: keep-track-of → [킵트래커브]) 이를 즉각 단일 의미 덩어리로 처리하지 못해 뒤따라오는 문장의 청취 흐름을 놓치게 됩니다.
+        </p>
+      </div>
+    `;
+    container.appendChild(impactDiv);
+  }
+
+  function restartAll() {
+    flashcardIndex = 0;
+    flashcardRoundCount = 1;
+    quizIndex = 0;
+    quizResults = {};
+    spellingIndex = 0;
+    spellingResults = {};
+    hwIndex = 0;
+    hwCompleted = {};
+    switchStep(0);
+    renderFlashcard();
+    renderQuiz();
+    renderSpelling();
+  }
+
+  // Initialize on Load
+  window.onload = () => {
+    renderFlashcard();
+    renderQuiz();
+    renderSpelling();
+  };
+</script>
+
+</body>
+</html>
